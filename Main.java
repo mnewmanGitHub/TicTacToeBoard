@@ -16,10 +16,11 @@ import javafx.event.EventHandler;
 
 public class Main extends Application {
     /**
-     * Along with changing the color, use a picture
-     * Try using one event handler w/ inner class to alternate colors/images
-     * Use if '.getSource instanceof Shape' to determine changes
+     * Find a way for the winner to be displayed immediately when they win
+     * Use images instead of colors, Use Text instead of colors
+     * Try out animations
      */
+    private static int clickCount = 0;
     private Rectangle box = new Rectangle(150, 150, BROWN);
     private Rectangle box1 = new Rectangle(150, 150, BROWN);
     private Rectangle box2 = new Rectangle(150, 150, BROWN);
@@ -56,28 +57,59 @@ public class Main extends Application {
         ticTacToeBox.add(box6, 1,3);
         ticTacToeBox.add(box7, 2, 3);
         ticTacToeBox.add(box8, 3,3);
-        //Handler handle = new Handler();
-        box.setOnMousePressed(e -> box.setFill(javafx.scene.paint.Color.RED));
-        box1.setOnMousePressed(e -> box1.setFill(javafx.scene.paint.Color.RED));
-        box2.setOnMousePressed(e -> box2.setFill(javafx.scene.paint.Color.RED));
-        box3.setOnMousePressed(e -> box3.setFill(javafx.scene.paint.Color.RED));
-        box4.setOnMousePressed(e -> box4.setFill(javafx.scene.paint.Color.RED));
-        box5.setOnMousePressed(e -> box5.setFill(javafx.scene.paint.Color.RED));
-        box6.setOnMousePressed(e -> box6.setFill(javafx.scene.paint.Color.RED));
-        box7.setOnMousePressed(e -> box7.setFill(javafx.scene.paint.Color.RED));
-        box8.setOnMousePressed(e -> box8.setFill(javafx.scene.paint.Color.RED));
+        Handler handle = new Handler();
+        box.setOnMousePressed(handle);
+        box1.setOnMousePressed(handle);
+        box2.setOnMousePressed(handle);
+        box3.setOnMousePressed(handle);
+        box4.setOnMousePressed(handle);
+        box5.setOnMousePressed(handle);
+        box6.setOnMousePressed(handle);
+        box7.setOnMousePressed(handle);
+        box8.setOnMousePressed(handle);
         primaryStage.setScene(new Scene(ticTacToeBox, 300, 300));
         primaryStage.show();
     }
 
     /**private Rectangle createRec(int width, int height, Color desiredColor) {
         return new Rectangle(width, height, BROWN);
-    }
+    }*/
         class Handler implements EventHandler<MouseEvent> {
             public void handle(MouseEvent e) {
-               box8.setFill(javafx.scene.paint.Color.RED);
+                //same color column 1
+                if((box.getFill().equals(Color.RED) || box.getFill().equals(Color.CORNFLOWERBLUE)) && box.getFill().equals(box3.getFill()) && box.getFill().equals(box6)) {
+                    System.out.println(box.getFill().toString() + " Won!");
+        //same color row 1
+                } else if((box.getFill().equals(Color.RED) || box.getFill().equals(Color.CORNFLOWERBLUE)) && box.getFill().equals(box1.getFill()) && box.getFill().equals(box2.getFill())) {
+                    System.out.println(box.getFill().toString() + " Won!");
+                } else if((box1.getFill().equals(Color.RED) || box1.getFill().equals(Color.CORNFLOWERBLUE)) && box1.getFill().equals(box4.getFill()) && box1.equals(box7.getFill())) {
+                    //same color column 2
+                    System.out.println(box1.getFill().toString() + " Won!");
+                } else if((box3.getFill().equals(Color.RED) || box3.getFill().equals(Color.CORNFLOWERBLUE)) && box3.getFill().equals(box4.getFill()) && box3.getFill().equals(box5.getFill())) {
+                    //same color row 2
+                    System.out.println(box3.getFill().toString() + " Won!");
+                } else if((box2.getFill().equals(Color.RED) || box2.getFill().equals(Color.CORNFLOWERBLUE)) && box2.getFill().equals(box5.getFill()) && box2.getFill().equals(box8.getFill())) {
+                    //same color column 3
+                    System.out.println(box2.getFill().toString() + " Won!");
+                } else if((box6.getFill().equals(Color.RED) || box6.getFill().equals(Color.CORNFLOWERBLUE)) && box6.getFill().equals(box7.getFill()) && box6.getFill().equals(box8.getFill())) {
+                    System.out.println(box6.getFill().toString() + " Won!");
+                } else {
+                Object source = e.getSource();
+                if(source instanceof Shape) {
+                    Shape src = (Shape) source;
+                    clickCount++;
+                    if (clickCount % 2 != 0) {
+                        src.setFill(Color.RED);
+                    } else {
+                        src.setFill(Color.CORNFLOWERBLUE);
+                    }
+                }
+                }
+
         }
-    }*/
+    }
+
+
 
     public static void main(String[] args) {
         launch(args);
