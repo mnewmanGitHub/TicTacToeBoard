@@ -1,6 +1,7 @@
 package sample;
-//package javafx.animation;
+import javafx.scene.effect.Glow;
 import javafx.application.Application;
+import javafx.scene.layout.StackPane;
 //import javafx.fxml.FXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
@@ -32,6 +33,11 @@ public class Main extends Application {
      * Try out animations
      */
     private static int clickCount = 0;
+    //Change color of the glow
+    private Glow glow = new Glow();
+    private StackPane forTheWinner = new StackPane();
+    //Change the font and size of the Winner's name
+    private Label winnerName;
     private Button startOver = new Button("Restart Game");
     private TextField player1 = new TextField("Player 1 Name");
     private TextField player2 = new TextField("Player 2 Name");
@@ -79,7 +85,8 @@ public class Main extends Application {
         ticTacToeBox.add(box6, 1,3);
         ticTacToeBox.add(box7, 2, 3);
         ticTacToeBox.add(box8, 3,3);
-        bP.setCenter(ticTacToeBox);
+        forTheWinner.getChildren().add(ticTacToeBox);
+        bP.setCenter(forTheWinner);
         //vBox.getChildren().addAll(label1,label2);
         RestartTheGame rS = new RestartTheGame();
         startOver.setOnAction(rS);
@@ -121,7 +128,7 @@ public class Main extends Application {
                             src.setFill(Color.CORNFLOWERBLUE);
                         }
                         if (isMatch()) {
-                            System.out.print("Someone Won!");
+                            //System.out.print("Someone Won!");
                             return;
                         }
                     }
@@ -142,7 +149,16 @@ public class Main extends Application {
                                 src.setFill(Color.CORNFLOWERBLUE);
                             }
                             if (isMatch()) {
-                                System.out.print("Someone Won!");
+                                //System.out.print("Someone Won!");
+                                if(clickCount % 2 != 0) {
+                                    winnerName = new Label(player1.getText());
+                                    winnerName.setEffect(glow);
+                                    forTheWinner.getChildren().add(winnerName);
+                                } else {
+                                    winnerName = new Label(player2.getText());
+                                    winnerName.setEffect(glow);
+                                    forTheWinner.getChildren().add(winnerName);
+                                }
                                 return;
                             }
                         }
