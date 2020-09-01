@@ -55,6 +55,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Tic-Tac-Toe");
+        startOver.setStyle("-fx-background-color: #45788b");
         //Scene scene = new Scene(root, 300, 275);
         Label label1 = new Label("Player 1:");
         Label label2 = new Label("Player 2:");
@@ -218,6 +219,17 @@ public class Main extends Application {
         }  else {
         return false;
         }
+    }
+    private void setColor() {
+        box.setStyle("-fx-background-color: chocolate");
+        box1.setStyle("-fx-background-color: chocolate");
+        box2.setStyle("-fx-background-color: chocolate");
+        box3.setStyle("-fx-background-color: chocolate");
+        box4.setStyle("-fx-background-color: chocolate");
+        box5.setStyle("-fx-background-color: chocolate");
+        box6.setStyle("-fx-background-color: chocolate");
+        box7.setStyle("-fx-background-color: chocolate");
+        box8.setStyle("-fx-background-color: chocolate");
     }
 
 
