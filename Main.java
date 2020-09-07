@@ -39,8 +39,8 @@ public class Main extends Application {
     //Change the font and size of the Winner's name
     private Label winnerName;
     private Button startOver = new Button("Restart Game");
-    private TextField player1 = new TextField("Player 1 Name");
-    private TextField player2 = new TextField("Player 2 Name");
+    private TextField player1 = new TextField("Player 1");
+    private TextField player2 = new TextField("Player 2");
     private Rectangle box = new Rectangle(150, 150, BROWN);
     private Rectangle box1 = new Rectangle(150, 150, BROWN);
     private Rectangle box2 = new Rectangle(150, 150, BROWN);
@@ -70,13 +70,6 @@ public class Main extends Application {
         ticTacToeBox.setHgap(10);
         ticTacToeBox.setVgap(10);
 
-        /**VBox vbox = new VBox();
-        VBox vbox1 = new VBox();
-        vbox.setSpacing(1000);
-        vbox.getChildren().addAll(box, box1, box2);
-        vbox1.getChildren().addAll(box,box1, box2);
-        ticTacToeBox.addColumn(1, vbox);
-        ticTacToeBox.addColumn(2, vbox1);*/
         ticTacToeBox.add(box, 1, 1);
         ticTacToeBox.add(box1, 2, 1);
         ticTacToeBox.add(box2, 3, 1);
@@ -88,13 +81,10 @@ public class Main extends Application {
         ticTacToeBox.add(box8, 3,3);
         forTheWinner.getChildren().add(ticTacToeBox);
         bP.setCenter(forTheWinner);
-        //vBox.getChildren().addAll(label1,label2);
         RestartTheGame rS = new RestartTheGame();
         startOver.setOnAction(rS);
         hBox.getChildren().addAll(label1, player1, label2, player2, startOver);
         bP.setBottom(hBox);
-        //hBox.getChildren().add(label1);
-        //ticTacToeBox.addRow(4, hBox);
         BoxHandler handle = new BoxHandler();
         box.setOnMousePressed(handle);
         box1.setOnMousePressed(handle);
@@ -109,9 +99,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    /**private Rectangle createRec(int width, int height, Color desiredColor) {
-        return new Rectangle(width, height, BROWN);
-    }*/
+
         class BoxHandler implements EventHandler<MouseEvent> {
             public void handle(MouseEvent e) {
                 if(clickCount == 0) {
@@ -121,15 +109,13 @@ public class Main extends Application {
                         Shape src = (Shape) source;
                         clickCount++;
                         if (clickCount == 9) {
-                            System.out.print("Its a Draw!");
-                            //src.setFill(Color.RED);
+                            src.setFill(Color.RED);
                         } else if (clickCount % 2 != 0) {
                             src.setFill(Color.RED);
                         } else {
                             src.setFill(Color.CORNFLOWERBLUE);
                         }
                         if (isMatch()) {
-                            //System.out.print("Someone Won!");
                             return;
                         }
                     }
@@ -143,24 +129,28 @@ public class Main extends Application {
                             Shape src = (Shape) source;
                             clickCount++;
                             if (clickCount == 9) {
-                                System.out.print("Its a Draw!");
+                                src.setFill(Color.RED);
                             } else if (clickCount % 2 != 0) {
                                 src.setFill(Color.RED);
                             } else {
                                 src.setFill(Color.CORNFLOWERBLUE);
                             }
                             if (isMatch()) {
-                                //System.out.print("Someone Won!");
                                 if(clickCount % 2 != 0) {
-                                    winnerName = new Label(player1.getText());
-                                    winnerName.setEffect(glow);
-                                    forTheWinner.getChildren().add(winnerName);
+                                    winnerName = new Label(player1.getText() + " WON!");
                                 } else {
-                                    winnerName = new Label(player2.getText());
+                                    winnerName = new Label(player2.getText() + " WON!");
+                                }
+                                winnerName.setStyle("-fx-font-size: 30 px; -fx-font-family: 'Times New Roman'");
+                                winnerName.setEffect(glow);
+                                forTheWinner.getChildren().add(winnerName);
+                            } else {
+                                if(clickCount == 9) {
+                                    winnerName = new Label("DRAW");
+                                    winnerName.setStyle("-fx-font-size: 50 px");
                                     winnerName.setEffect(glow);
                                     forTheWinner.getChildren().add(winnerName);
                                 }
-                                return;
                             }
                         }
                     }
@@ -180,6 +170,7 @@ public class Main extends Application {
                 box6.setFill(BROWN);
                 box7.setFill(BROWN);
                 box8.setFill(BROWN);
+                forTheWinner.getChildren().remove(winnerName);
 
             }
         }
@@ -189,49 +180,31 @@ public class Main extends Application {
             //same color column 1
         if((box.getFill().equals(Color.RED) || box.getFill().equals(Color.CORNFLOWERBLUE)) && box.getFill().equals(box3.getFill()) && box.getFill().equals(box6)) {
             return true;
-            //System.out.println(box.getFill().toString() + " Won!");
             //same color row 1
         } else if((box.getFill().equals(Color.RED) || box.getFill().equals(Color.CORNFLOWERBLUE)) && box.getFill().equals(box1.getFill()) && box.getFill().equals(box2.getFill())) {
             return true;
-            //System.out.println(box.getFill().toString() + " Won!");
         } else if((box1.getFill().equals(Color.RED) || box1.getFill().equals(Color.CORNFLOWERBLUE)) && box1.getFill().equals(box4.getFill()) && box1.equals(box7.getFill())) {
             //same color column 2
             return true;
-            //System.out.println(box1.getFill().toString() + " Won!");
         } else if((box3.getFill().equals(Color.RED) || box3.getFill().equals(Color.CORNFLOWERBLUE)) && box3.getFill().equals(box4.getFill()) && box3.getFill().equals(box5.getFill())) {
             //same color row 2
             return true;
-            //System.out.println(box3.getFill().toString() + " Won!");
         } else if((box2.getFill().equals(Color.RED) || box2.getFill().equals(Color.CORNFLOWERBLUE)) && box2.getFill().equals(box5.getFill()) && box2.getFill().equals(box8.getFill())) {
             //same color column 3
             return true;
-            //System.out.println(box2.getFill().toString() + " Won!");
         } else if((box6.getFill().equals(Color.RED) || box6.getFill().equals(Color.CORNFLOWERBLUE)) && box6.getFill().equals(box7.getFill()) && box6.getFill().equals(box8.getFill())) {
             //same color row 3
             return true;
-            //System.out.println(box6.getFill().toString() + " Won!");
         } else if((box.getFill().equals(Color.RED)|| box.getFill().equals(Color.CORNFLOWERBLUE)) && box.getFill().equals(box4.getFill()) && box.getFill().equals(box8.getFill())) {
-            //same color right diagnol
+            //same color right diagonal
             return true;
         } else if((box2.getFill().equals(Color.RED)|| box2.getFill().equals(Color.CORNFLOWERBLUE)) && box2.getFill().equals(box4.getFill()) && box2.getFill().equals(box6.getFill())) {
-            //same color left diagnol
+            //same color left diagonal
             return true;
         }  else {
         return false;
         }
     }
-    private void setColor() {
-        box.setStyle("-fx-background-color: chocolate");
-        box1.setStyle("-fx-background-color: chocolate");
-        box2.setStyle("-fx-background-color: chocolate");
-        box3.setStyle("-fx-background-color: chocolate");
-        box4.setStyle("-fx-background-color: chocolate");
-        box5.setStyle("-fx-background-color: chocolate");
-        box6.setStyle("-fx-background-color: chocolate");
-        box7.setStyle("-fx-background-color: chocolate");
-        box8.setStyle("-fx-background-color: chocolate");
-    }
-
 
     public static void main(String[] args) {
         launch(args);
