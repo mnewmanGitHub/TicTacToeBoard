@@ -8,6 +8,6 @@ Project Status:
 -This project is still in progress. As I learn more about the game's bugs and explore the different changes I could make to the game to make it more interesting, I plan to continue to improve and build on the current state of the project. 
 
 Possible Changes/Additions to the Project:
-- Options for differnt colors for users to play the game with
+- Options for different colors for users to play the game with
 - Options for different symbols/words for the users to play the game with (i.e. Xs, Os, check signs)
 - Make code more concise
