@@ -27,16 +27,9 @@ import javafx.event.ActionEvent;
 import javax.swing.*;
 
 public class Main extends Application {
-    /**
-     * Find a way for the winner to be displayed immediately when they win
-     * Use images instead of colors, Use Text instead of colors
-     * Try out animations
-     */
     private static int clickCount = 0;
-    //Change color of the glow
     private Glow glow = new Glow();
     private StackPane forTheWinner = new StackPane();
-    //Change the font and size of the Winner's name
     private Label winnerName;
     private Button startOver = new Button("Restart Game");
     private TextField player1 = new TextField("Player 1");
@@ -65,7 +58,6 @@ public class Main extends Application {
         GridPane ticTacToeBox = new GridPane();
         HBox hBox = new HBox();
         hBox.setSpacing(10);
-        //VBox vBox = new VBox();
         ticTacToeBox.setGridLinesVisible(true);
         ticTacToeBox.setHgap(10);
         ticTacToeBox.setVgap(10);
@@ -103,7 +95,7 @@ public class Main extends Application {
         class BoxHandler implements EventHandler<MouseEvent> {
             public void handle(MouseEvent e) {
                 if(clickCount == 0) {
-                    //helper method
+                    //write a helper method
                     Object source = e.getSource();
                     if (source instanceof Shape) {
                         Shape src = (Shape) source;
@@ -123,7 +115,6 @@ public class Main extends Application {
                     if(isMatch()) {
                         return;
                     } else {
-                        //helper method
                         Object source = e.getSource();
                         if (source instanceof Shape) {
                             Shape src = (Shape) source;
