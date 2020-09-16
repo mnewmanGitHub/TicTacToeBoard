@@ -95,7 +95,7 @@ public class Main extends Application {
         class BoxHandler implements EventHandler<MouseEvent> {
             public void handle(MouseEvent e) {
                 if(clickCount == 0) {
-                    //write a helper method
+                    // write a helper method
                     Object source = e.getSource();
                     if (source instanceof Shape) {
                         Shape src = (Shape) source;
